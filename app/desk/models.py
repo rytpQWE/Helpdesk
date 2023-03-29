@@ -26,5 +26,5 @@ class Desk(models.Model):
 
 class DeskImage(models.Model):
     desk = models.ForeignKey(Desk, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='images/')
+    images = models.ImageField(upload_to='images/', blank=True)
 
