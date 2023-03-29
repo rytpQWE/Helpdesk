@@ -5,6 +5,9 @@ from django.db import models
 class Category(models.Model):
     category = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.category
+
 
 class Desk(models.Model):
     STATUS_TYPE = (
@@ -22,6 +25,9 @@ class Desk(models.Model):
     comment = models.TextField(max_length=2000)
     image = models.FileField()
     status = models.CharField(choices=STATUS_TYPE, max_length=30, default='Accepted')
+
+    def __str__(self):
+        return self.title
 
 
 class DeskImage(models.Model):
