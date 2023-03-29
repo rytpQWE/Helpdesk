@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from desk.models import Category, Desk
+
+
+@admin.register(Category)
+@admin.register(Desk)
+class AdminPanel:
+    pass
