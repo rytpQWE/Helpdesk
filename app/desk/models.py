@@ -45,3 +45,6 @@ class DeskImage(models.Model):
     )
     images = models.ImageField(upload_to='images/')
 
+    def __str__(self):
+        return f'Image id: {self.pk}'
+
