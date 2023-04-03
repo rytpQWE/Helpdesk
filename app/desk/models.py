@@ -26,7 +26,7 @@ class Desk(models.Model):
         on_delete=models.CASCADE
     )
     comment = models.TextField(max_length=2000)
-    image = models.FileField(blank=True)
+    image = models.FileField(null=True, blank=True)
     status = models.CharField(
         choices=STATUS_TYPE,
         max_length=30,
@@ -42,8 +42,9 @@ class DeskImage(models.Model):
         Desk,
         default=None,
         on_delete=models.CASCADE,
+        related_name='img',
     )
-    images = models.ImageField(upload_to='images/')
+    images = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return f'Image id: {self.pk}'
