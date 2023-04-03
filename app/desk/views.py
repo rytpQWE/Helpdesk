@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets, mixins
 
 from desk.models import Desk
@@ -14,6 +13,8 @@ class DeskViewSet(viewsets.GenericViewSet,
 
     def perform_create(self, serializer):
         """Create and save current user in form(desk)"""
-        serializer.save(user=self.request.user)
+        serializer.save(User=self.request.user)
 
-
+    def get_queryset(self):
+        """Get object's current user"""
+        return self.queryset.filter(user=self.request.user)
