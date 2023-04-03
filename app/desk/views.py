@@ -1,13 +1,14 @@
 from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 from desk.models import Desk
-from desk.serializers import DeskCreateSerializer
+from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
 
 
 class DeskViewSet(viewsets.GenericViewSet,
                   mixins.ListModelMixin,
-                  mixins.CreateModelMixin,
-                  ):
+                  mixins.CreateModelMixin,):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Desk.objects.all()
     serializer_class = DeskCreateSerializer
 
@@ -17,4 +18,12 @@ class DeskViewSet(viewsets.GenericViewSet,
 
     def get_queryset(self):
         """Get object's current user"""
-        return self.queryset.filter(user=self.request.user)
+        return self.queryset.filter(User=self.request.user.id)
+
+
+class AdminDeskViewSet(viewsets.GenericViewSet,
+                       mixins.ListModelMixin,):
+    permission_classes = [IsAdminUser]
+    queryset = Desk.objects.all().order_by('created_at')[:3]
+    serializer_class = AdminDeskSerializer
+
