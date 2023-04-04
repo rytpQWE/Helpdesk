@@ -8,7 +8,8 @@ from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
 
 class DeskViewSet(viewsets.GenericViewSet,
                   mixins.ListModelMixin,
-                  mixins.CreateModelMixin,):
+                  mixins.CreateModelMixin,
+                  mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Desk.objects.all()
     serializer_class = DeskCreateSerializer
