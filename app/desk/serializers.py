@@ -43,4 +43,4 @@ class AdminDeskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Desk
         fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'status', 'images_set']
-
+        read_only_fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'images_set']
