@@ -7,3 +7,7 @@ class MainDeskPagination(PageNumberPagination):
     max_page_size = 10000
 
 
+class AdminDeskPagination(PageNumberPagination):
+    page_size = 6
+    page_size_query_param = 'page_size'
+    max_page_size = 10000
