@@ -13,7 +13,8 @@ class DeskViewSet(viewsets.GenericViewSet,
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Desk.objects.all()
     serializer_class = DeskCreateSerializer
-
+    pagination_class = MainDeskPagination
+    """To delete desk, you need to pass pk in url"""
     def perform_create(self, serializer):
         """Create and save current user in form(desk)"""
         serializer.save(User=self.request.user)
