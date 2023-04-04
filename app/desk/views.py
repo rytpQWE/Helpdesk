@@ -29,6 +29,6 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
                        mixins.UpdateModelMixin):
     """To update desk, you need to pass pk in url"""
     permission_classes = [IsAdminUser]
-    queryset = Desk.objects.all().order_by('created_at')[:3]
+    queryset = Desk.objects.all().order_by('created_at')
     serializer_class = AdminDeskSerializer
 
