@@ -26,7 +26,7 @@ urlpatterns = [
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 router = routers.DefaultRouter()
-router.register('api/desk', views.DeskViewSet)
-router.register('api/desk/admin', views.AdminDeskViewSet)
+router.register('api/desk', views.DeskViewSet, basename='main')
+router.register('api/admindesk', views.AdminDeskViewSet, basename='admin')
 
 urlpatterns += router.urls
