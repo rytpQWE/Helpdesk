@@ -2,6 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 from desk.models import Desk
+from desk.pagination import MainDeskPagination, AdminDeskPagination
 from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
 
 
