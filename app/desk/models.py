@@ -11,9 +11,8 @@ class Category(models.Model):
 
 class Desk(models.Model):
     STATUS_TYPE = (
-        ('accepted', 'Accepted'),
-        ('in_progress', 'In progress'),
-        ('completed', 'Completed'),
+        ('accepted', 'accepted'),
+        ('completed', 'completed'),
     )
     User = models.ForeignKey(
         User,
