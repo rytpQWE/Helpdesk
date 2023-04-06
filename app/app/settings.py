@@ -134,3 +134,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 5
 }
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rytpiss@gmail.com'
+EMAIL_HOST_PASSWORD = 'ehckadakryxetvuw'
+EMAIL_PORT = 587
