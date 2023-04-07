@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
@@ -34,3 +35,14 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     queryset = Desk.objects.filter(status='accepted').order_by('created_at')
     serializer_class = AdminDeskSerializer
     pagination_class = AdminDeskPagination
+
+    def perform_update(self, serializer):
+        obj = serializer.save()
+        email = EmailMessage(
+            'HelpDesk',
+            f'Your application: {obj.title} has been completed',
+            to=[str(obj.User.email)]
+        )
+        email.send()
+        return obj
+
