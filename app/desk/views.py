@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
+from desk.permissions import IsEmployeeUser
 from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
 
 
@@ -30,7 +31,7 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
                        mixins.ListModelMixin,
                        mixins.UpdateModelMixin):
     """To update desk, you need to pass pk in url"""
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
     queryset = Desk.objects.filter(status='accepted').order_by('created_at')
     serializer_class = AdminDeskSerializer
