@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
-from desk.models import Category, Desk, DeskImage
+from desk.models import Category, Desk, DeskImage, Employee
 
 
 class DeskImageAdmin(admin.StackedInline):
@@ -23,4 +23,9 @@ class CategoryAdminPanel(ModelAdmin):
 
 @admin.register(DeskImage)
 class ImageAdminPanel(ModelAdmin):
+    pass
+
+
+@admin.register(Employee)
+class EmployeeAdminPanel(ModelAdmin):
     pass
