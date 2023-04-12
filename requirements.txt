@@ -4,3 +4,4 @@ psycopg2-binary==2.9.5
 pillow==9.4.0
 djoser==2.1.0
 djangorestframework-simplejwt==4.8.0
+celery[redis]==5.2.7
