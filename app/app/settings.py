@@ -158,3 +158,5 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {},
 }
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
