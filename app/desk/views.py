@@ -6,6 +6,7 @@ from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
 from desk.permissions import IsEmployeeUser
 from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
+from desk.tasks import send_mail
 
 
 class DeskViewSet(viewsets.GenericViewSet,
@@ -39,11 +40,12 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
 
     def perform_update(self, serializer):
         obj = serializer.save()
-        email = EmailMessage(
-            'HelpDesk',
-            f'Your application: {obj.title} has been completed',
-            to=[str(obj.User.email)]
-        )
-        email.send()
+        # email = EmailMessage(
+        #     'HelpDesk',
+        #     f'Your application: {obj.title} has been completed',
+        #     to=[str(obj.User.email)]
+        # )
+        # email.send()
+        send_mail.delay(obj.id)
         return obj
 
