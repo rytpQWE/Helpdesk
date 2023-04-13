@@ -36,3 +36,23 @@ services:
       - redis
     depends_on:
       - redis
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+  flower:
+    build:
+      context: .
+    hostname: flower
+    entrypoint: celery
+    command: -A celery_app.app flower
+    volumes:
+      - ./app:/app
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - '5555:5555'
