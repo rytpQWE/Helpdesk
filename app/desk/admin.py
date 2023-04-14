@@ -11,6 +11,7 @@ class DeskImageAdmin(admin.StackedInline):
 @admin.register(Desk)
 class DeskAdminPanel(ModelAdmin):
     inlines = [DeskImageAdmin]
+    readonly_fields = ('employee_comment', )
 
     class Meta:
         model = Desk
