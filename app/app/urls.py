@@ -29,6 +29,7 @@ urlpatterns = [
 
 router = routers.DefaultRouter()
 router.register('api/desk', views.DeskViewSet, basename='main')
+router.register('api/completed_desk', views.DeskCompleteViewSet, basename='desk_completed')
 router.register('api/employee_desk', views.AdminDeskViewSet, basename='employee')
 
 urlpatterns += router.urls
