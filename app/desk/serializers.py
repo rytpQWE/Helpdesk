@@ -29,9 +29,7 @@ class DeskCreateSerializer(serializers.ModelSerializer):
         """Method override for save multiply images"""
         uploaded_images = validated_data.pop("uploaded_images")
         desk = Desk.objects.create(**validated_data)
-        if uploaded_images is None:
-            pass
-        else:
+        if uploaded_images:
             for image in uploaded_images:
                 newdesk_image = DeskImage.objects.create(desk=desk, images=image)
         return desk
