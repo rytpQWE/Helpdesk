@@ -33,6 +33,11 @@ class Desk(models.Model):
         max_length=30,
         default='Accepted',
     )
+    employee_comment = models.TextField(
+        max_length=2000,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.title
