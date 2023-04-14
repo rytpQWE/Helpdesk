@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from rest_framework import serializers
 
 from desk.models import Desk, DeskImage
@@ -33,6 +35,20 @@ class DeskCreateSerializer(serializers.ModelSerializer):
             for image in uploaded_images:
                 newdesk_image = DeskImage.objects.create(desk=desk, images=image)
         return desk
+
+
+class DeskCompleteSerializer(serializers.ModelSerializer):
+    images_set = ImagesSerializer(many=True, source='img', read_only=True)
+
+    class Meta:
+        model = Desk
+        fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'status', 'employee_comment',
+                  'images_set']
+
+    # To delete null fields
+    def to_representation(self, instance):
+        result = super(DeskCompleteSerializer, self).to_representation(instance)
+        return OrderedDict([(key, result[key]) for key in result if result[key] is not None])
 
 
 class AdminDeskSerializer(serializers.ModelSerializer):
