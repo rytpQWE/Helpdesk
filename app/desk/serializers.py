@@ -58,3 +58,9 @@ class AdminDeskSerializer(serializers.ModelSerializer):
         model = Desk
         fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'status', 'images_set', 'employee_comment']
         read_only_fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'images_set']
+        extra_kwargs = {'employee_comment': {"required": False, "allow_null": True}}
+
+    # To delete null fields
+    def to_representation(self, instance):
+        result = super(AdminDeskSerializer, self).to_representation(instance)
+        return OrderedDict([(key, result[key]) for key in result if result[key] is not None])
