@@ -45,10 +45,10 @@ class DeskCompleteSerializer(serializers.ModelSerializer):
         fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'status', 'employee_comment',
                   'images_set']
 
-    # To delete null fields
+    # To delete null and '' fields
     def to_representation(self, instance):
         result = super(DeskCompleteSerializer, self).to_representation(instance)
-        return OrderedDict([(key, result[key]) for key in result if result[key] is not None])
+        return OrderedDict([(key, result[key]) for key in result if result[key] not in [None, ""]])
 
 
 class AdminDeskSerializer(serializers.ModelSerializer):
