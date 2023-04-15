@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
 from desk.permissions import IsEmployeeUser
-from desk.serializers import DeskCreateSerializer, AdminDeskSerializer
+from desk.serializers import DeskCreateSerializer, AdminDeskSerializer, DeskCompleteSerializer
 from desk.tasks import send_mail
 
 
@@ -22,6 +22,17 @@ class DeskViewSet(viewsets.GenericViewSet,
     def perform_create(self, serializer):
         """Create and save current user in form(desk)"""
         serializer.save(User=self.request.user)
+
+    def get_queryset(self):
+        """Get object's current user"""
+        return self.queryset.filter(User=self.request.user.id)
+
+
+class DeskCompleteViewSet(viewsets.GenericViewSet,
+                          mixins.ListModelMixin):
+    queryset = Desk.objects.filter(status='completed')
+    serializer_class = DeskCompleteSerializer
+    pagination_class = MainDeskPagination
 
     def get_queryset(self):
         """Get object's current user"""
