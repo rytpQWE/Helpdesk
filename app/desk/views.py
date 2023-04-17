@@ -1,12 +1,11 @@
-from django.core.mail import EmailMessage
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
 from desk.permissions import IsEmployeeUser
 from desk.serializers import DeskCreateSerializer, AdminDeskSerializer, DeskCompleteSerializer
-from desk.tasks import send_mail
+from desk.tasks import send_mail_for_user, send_employee_mail
 
 
 class DeskViewSet(viewsets.GenericViewSet,
@@ -21,7 +20,8 @@ class DeskViewSet(viewsets.GenericViewSet,
 
     def perform_create(self, serializer):
         """Create and save current user in form(desk)"""
-        serializer.save(User=self.request.user)
+        obj = serializer.save(User=self.request.user)
+        send_employee_mail.delay(obj.id)
 
     def get_queryset(self):
         """Get object's current user"""
@@ -57,6 +57,6 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
         #     to=[str(obj.User.email)]
         # )
         # email.send()
-        send_mail.delay(obj.id)
+        send_mail_for_user.delay(obj.id)
         return obj
 
