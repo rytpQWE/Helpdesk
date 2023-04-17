@@ -31,7 +31,7 @@ class Desk(models.Model):
     status = models.CharField(
         choices=STATUS_TYPE,
         max_length=30,
-        default='Accepted',
+        default='accepted',
     )
     employee_comment = models.TextField(
         max_length=2000,
