@@ -50,14 +50,22 @@ class DeskImage(models.Model):
         on_delete=models.CASCADE,
         related_name='img',
     )
-    images = models.ImageField(upload_to='images/', null=True, blank=True)
+    images = models.ImageField(
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return f'Image id: {self.pk}'
 
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='employee'
+    )
     is_employee = models.BooleanField(default=False)
 
     def __str__(self):
