@@ -4,6 +4,18 @@
 Creating tickets to solve problems
 
 ## Key concepts:
+- Any authenticated user can create a ticket;
+  * Also: delete and add images
+- Tickets are only visible to their creators;
+- Tickets have only two types(Accepted, Completed):
+  * When creating a ticket, the status == "accepted" by default and sends a mail to all employees<br>
+    Tickets with status "accepted" available on ``` "/api/desk" ```
+  * Tickets with status "completed" available on ``` "/api/completed_desk" ```
+- There is also a user - an employee:
+  * Employee have custom permission
+  * Only employee can view ``` "/api/employee_desk" ```
+  * When an employee completed a ticket, an email is sent to the user's email
+- Non-authenticated users do not have access to the main endpoints, other than login and register;
 
 ## To run application on local machine:
 **1. Clone the repository:**
