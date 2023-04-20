@@ -16,6 +16,7 @@ Creating tickets to solve problems
   * Only employee can view ``` "/api/employee_desk" ```
   * When an employee completed a ticket, an email is sent to the user's email
 - Non-authenticated users do not have access to the main endpoints, other than login and register;
+- All mailing is done through Celery
 
 ## To run application on local machine:
 **1. Clone the repository:**
