@@ -147,8 +147,8 @@ REST_FRAMEWORK = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yourmail'
-EMAIL_HOST_PASSWORD = 'yourpass'
+EMAIL_HOST_USER = 'rytpiss@gmail.com'
+EMAIL_HOST_PASSWORD = 'afpmkxmqrfvrooff'
 EMAIL_PORT = 587
 
 DJOSER = {
