@@ -16,15 +16,21 @@ class DeskViewSet(viewsets.GenericViewSet,
     queryset = Desk.objects.all()
     serializer_class = DeskCreateSerializer
     pagination_class = MainDeskPagination
-    """To delete desk, you need to pass pk in url"""
+    """
+    To delete desk, you need to pass pk in url
+    """
 
     def perform_create(self, serializer):
-        """Create and save current user in form(desk)"""
+        """
+        Create and save current user in form(desk)
+        """
         obj = serializer.save(User=self.request.user)
         send_employee_mail.delay(obj.id)
 
     def get_queryset(self):
-        """Get object's current user"""
+        """
+        Get object's current user
+        """
         return self.queryset.filter(User=self.request.user.id)
 
 
@@ -35,14 +41,18 @@ class DeskCompleteViewSet(viewsets.GenericViewSet,
     pagination_class = MainDeskPagination
 
     def get_queryset(self):
-        """Get object's current user"""
+        """
+        Get object's current user
+        """
         return self.queryset.filter(User=self.request.user.id)
 
 
 class AdminDeskViewSet(viewsets.GenericViewSet,
                        mixins.ListModelMixin,
                        mixins.UpdateModelMixin):
-    """To update desk, you need to pass pk in url"""
+    """
+    To update desk, you need to pass pk in url
+    """
     permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
     queryset = Desk.objects.filter(status='accepted').order_by('created_at')

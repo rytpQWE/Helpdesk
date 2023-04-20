@@ -28,7 +28,9 @@ class DeskCreateSerializer(serializers.ModelSerializer):
 
     # Upload files(images) only in postman
     def create(self, validated_data):
-        """Method override for save multiply images"""
+        """
+        Method override for save multiply images
+        """
         uploaded_images = validated_data.pop("uploaded_images")
         desk = Desk.objects.create(**validated_data)
         if uploaded_images:
