@@ -51,7 +51,7 @@ class DeskCompleteSerializer(serializers.ModelSerializer):
         return OrderedDict([(key, result[key]) for key in result if result[key] not in [None, ""]])
 
 
-class AdminDeskSerializer(serializers.ModelSerializer):
+class EmployeeDeskSerializer(serializers.ModelSerializer):
     images_set = ImagesSerializer(many=True, source='img', read_only=True)
 
     class Meta:
@@ -62,5 +62,5 @@ class AdminDeskSerializer(serializers.ModelSerializer):
 
     # To delete null fields
     def to_representation(self, instance):
-        result = super(AdminDeskSerializer, self).to_representation(instance)
+        result = super(EmployeeDeskSerializer, self).to_representation(instance)
         return OrderedDict([(key, result[key]) for key in result if result[key] is not None])

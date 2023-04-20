@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
 from desk.permissions import IsEmployeeUser
-from desk.serializers import DeskCreateSerializer, AdminDeskSerializer, DeskCompleteSerializer
+from desk.serializers import DeskCreateSerializer, EmployeeDeskSerializer, DeskCompleteSerializer
 from desk.tasks import send_mail_for_user, send_employee_mail
 
 
@@ -46,7 +46,7 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
     queryset = Desk.objects.filter(status='accepted').order_by('created_at')
-    serializer_class = AdminDeskSerializer
+    serializer_class = EmployeeDeskSerializer
     pagination_class = AdminDeskPagination
 
     def perform_update(self, serializer):
