@@ -1,5 +1,5 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
@@ -37,7 +37,8 @@ class DeskViewSet(viewsets.GenericViewSet,
 
 class DeskCompleteViewSet(viewsets.GenericViewSet,
                           mixins.ListModelMixin):
-    queryset = Desk.objects.filter(status='completed')
+    permission_classes = [IsAuthenticated]
+    queryset = Desk.objects.filter(status='completed').order_by('-id')
     serializer_class = DeskCompleteSerializer
     pagination_class = MainDeskPagination
 
@@ -56,18 +57,12 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     """
     permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
-    queryset = Desk.objects.filter(status='accepted').order_by('created_at')
+    queryset = Desk.objects.filter(status='accepted').order_by('-id')
     serializer_class = EmployeeDeskSerializer
     pagination_class = AdminDeskPagination
 
     def perform_update(self, serializer):
         obj = serializer.save()
-        # email = EmailMessage(
-        #     'HelpDesk',
-        #     f'Your application: {obj.title} has been completed',
-        #     to=[str(obj.User.email)]
-        # )
-        # email.send()
         send_mail_for_user.delay(obj.id)
         return obj
 
