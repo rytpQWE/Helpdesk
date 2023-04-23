@@ -11,9 +11,10 @@ from desk.tasks import send_mail_for_user, send_employee_mail
 class DeskViewSet(viewsets.GenericViewSet,
                   mixins.ListModelMixin,
                   mixins.CreateModelMixin,
-                  mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Desk.objects.all()
+                  mixins.DestroyModelMixin,
+                  mixins.RetrieveModelMixin):
+    permission_classes = [IsAuthenticated]
+    queryset = Desk.objects.order_by('-id')
     serializer_class = DeskCreateSerializer
     pagination_class = MainDeskPagination
     """
