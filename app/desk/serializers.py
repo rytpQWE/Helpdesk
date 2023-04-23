@@ -55,11 +55,12 @@ class DeskCompleteSerializer(serializers.ModelSerializer):
 
 class EmployeeDeskSerializer(serializers.ModelSerializer):
     images_set = ImagesSerializer(many=True, source='img', read_only=True)
+    status = serializers.ChoiceField(choices=('completed', 'completed'), default='completed')
 
     class Meta:
         model = Desk
         fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'status', 'images_set', 'employee_comment']
-        read_only_fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'images_set']
+        read_only_fields = ['id', 'User', 'title', 'created_at', 'category', 'comment', 'images_set', 'status']
         extra_kwargs = {'employee_comment': {"required": False, "allow_null": True}}
 
     # To delete null fields
