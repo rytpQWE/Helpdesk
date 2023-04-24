@@ -15,7 +15,7 @@ class DeskViewSet(viewsets.GenericViewSet,
                   mixins.DestroyModelMixin,
                   mixins.RetrieveModelMixin):
     permission_classes = [IsAuthenticated]
-    queryset = Desk.objects.order_by('-id')
+    queryset = Desk.objects.filter(status='accepted').order_by('-id')
     serializer_class = DeskCreateSerializer
     pagination_class = MainDeskPagination
     """
@@ -58,7 +58,7 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     """
     permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
-    queryset = Desk.objects.filter(status='accepted').order_by('-id')
+    queryset = Desk.objects.filter(status='accepted').order_by('id')
     serializer_class = EmployeeDeskSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category']
