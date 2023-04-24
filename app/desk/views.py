@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 from desk.models import Desk
 from desk.pagination import MainDeskPagination, AdminDeskPagination
@@ -59,6 +60,8 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     # Ordering only Accepted application
     queryset = Desk.objects.filter(status='accepted').order_by('-id')
     serializer_class = EmployeeDeskSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
     pagination_class = AdminDeskPagination
 
     def perform_update(self, serializer):
