@@ -39,6 +39,6 @@ Go to another terminal where the project is located <br>
 http://127.0.0.1:8000/
 
 ## Tests:
-In the terminal:
+In the terminal: <br>
 ``` sudo docker compose exec web python manage.py test ```
 
