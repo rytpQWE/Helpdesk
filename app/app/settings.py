@@ -165,17 +165,17 @@ DJOSER = {
     'SERIALIZERS': {},
 }
 
-LOGGING = {
-    'version': 1,
-    'handlers': {
-        'console': {'class': 'logging.StreamHandler'}
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG'  # IF WARNING - LOGGING ONLY ERRORS AND WARNINGS
-        }
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'handlers': {
+#         'console': {'class': 'logging.StreamHandler'}
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG'  # IF WARNING - LOGGING ONLY ERRORS AND WARNINGS
+#         }
+#     }
+# }
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
