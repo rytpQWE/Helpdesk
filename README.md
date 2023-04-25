@@ -4,8 +4,8 @@
 Creating tickets to solve problems
 
 ## Key concepts:
-- Any authenticated user can create a ticket;
-  * Also: delete and add images
+- Any authenticated user can create, delete a ticket;
+  * Also: add images, comment, name of ticket
 - Tickets are only visible to their creators;
 - Tickets have only two types(Accepted, Completed):
   * When creating a ticket, the status == "accepted" by default and sends a mail to all employees<br>
@@ -37,4 +37,8 @@ Go to another terminal where the project is located <br>
 
 **5. From now local version is available at**
 http://127.0.0.1:8000/
+
+## Tests:
+In the terminal: <br>
+``` sudo docker compose exec web python manage.py test ```
 
