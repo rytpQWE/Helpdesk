@@ -15,7 +15,7 @@ class DeskViewSet(viewsets.GenericViewSet,
                   mixins.DestroyModelMixin,
                   mixins.RetrieveModelMixin):
     permission_classes = [IsAuthenticated]
-    queryset = Desk.objects.filter(status='accepted').order_by('-id')
+    queryset = Desk.objects.prefetch_related('img').filter(status='accepted').order_by('-id')
     serializer_class = DeskCreateSerializer
     pagination_class = MainDeskPagination
     """
