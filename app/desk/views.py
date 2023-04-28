@@ -39,7 +39,7 @@ class DeskViewSet(viewsets.GenericViewSet,
 class DeskCompleteViewSet(viewsets.GenericViewSet,
                           mixins.ListModelMixin):
     permission_classes = [IsAuthenticated]
-    queryset = Desk.objects.filter(status='completed').order_by('-id')
+    queryset = Desk.objects.prefetch_related('img').filter(status='completed').order_by('-id')
     serializer_class = DeskCompleteSerializer
     pagination_class = MainDeskPagination
 
@@ -58,7 +58,7 @@ class AdminDeskViewSet(viewsets.GenericViewSet,
     """
     permission_classes = [IsEmployeeUser]
     # Ordering only Accepted application
-    queryset = Desk.objects.filter(status='accepted').order_by('id')
+    queryset = Desk.objects.prefetch_related('img').filter(status='accepted').order_by('id')
     serializer_class = EmployeeDeskSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category']
