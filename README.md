@@ -13,7 +13,7 @@ Creating tickets to solve problems
   * Tickets with status "completed" available on ``` "/api/completed_desk" ```
 - There is also a user - an employee:
   * Employee have custom permission
-  * Only employee can view ``` "/api/employee_desk" ```
+  * Only employee(or adminUser) can view ``` "/api/employee_desk" ```
   * When an employee completed a ticket, an email is sent to the user's email
 - Non-authenticated users do not have access to the main endpoints, other than login and register;
 - All mailing is done through Celery
