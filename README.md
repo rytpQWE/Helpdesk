@@ -5,7 +5,7 @@ Creating tickets to solve problems
 
 ## Key concepts:
 - Any authenticated user can create, delete a ticket;
-  * Also: add images, comment, name of ticket
+  * Also: add images, comment, name of ticket, category selection
 - Tickets are only visible to their creators;
 - Tickets have only two types(Accepted, Completed):
   * When creating a ticket, the status == "accepted" by default and sends a mail to all employees<br>
@@ -17,6 +17,7 @@ Creating tickets to solve problems
   * When an employee completed a ticket, an email is sent to the user's email
 - Non-authenticated users do not have access to the main endpoints, other than login and register;
 - All mailing is done through Celery
+- The project is covered with tests
 
 ## To run application on local machine:
 **1. Clone the repository:**
